@@ -61,7 +61,20 @@ The client will test both stdio and HTTP transports. For the best experience:
    - Start the HTTP server: `python mcp/mcp_server.py --transport streamable-http --port 8000`
    - Return to the first terminal and press Enter to continue
 
-### 3. Testing with MCP Inspector
+### 3. Connecting to a Dockerized MCP Toolkit
+
+If you have a Docker-based MCP toolkit that exposes many MCP servers on a single TCP port,
+the client can connect through a `socat` bridge. The client automatically launches a Docker
+container to pipe STDIO to the toolkit's TCP endpoint.
+
+```bash
+python mcp/mcp_client.py --host host.docker.internal --port 8811 --docker-image alpine/socat --list-tools
+```
+
+You can modify the host, port, or Docker image using the `--host`, `--port`, and
+`--docker-image` options. Use `--tool <tool_name>` to call a specific tool after listing.
+
+### 4. Testing with MCP Inspector
 
 You can also test the server using the built-in MCP inspector:
 
